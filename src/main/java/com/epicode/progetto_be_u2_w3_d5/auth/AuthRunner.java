@@ -33,9 +33,9 @@ public class AuthRunner implements ApplicationRunner {
         }
 
         // Creazione dell'utente seller se non esiste
-        Optional<AppUser> normalSeller = appUserService.findByUsername("seller");
+        Optional<AppUser> normalSeller = appUserService.findByUsername("organizzatore");
         if (normalUser.isEmpty()) {
-            appUserService.registerUser("seller", "sellerpwd", Set.of(Role.ROLE_ORGANIZZATORE));
+            appUserService.registerUser("organizzatore", "orgpwd", Set.of(Role.ROLE_ORGANIZZATORE));
         }
 
 
