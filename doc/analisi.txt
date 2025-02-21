@@ -1,0 +1,6 @@
+User (entity) : id, username, password (criptata), ruolo (enum).
+
+Evento (entity): id, titolo, descrizione, data, location, numero di partecipanti, User (chiave esterna)
+
+Prenotazione (entity): id, User (chiave esterna), Evento (chiave esterna)
+
