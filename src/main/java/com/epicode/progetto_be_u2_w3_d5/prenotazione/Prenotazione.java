@@ -14,17 +14,16 @@ public class Prenotazione {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idPrenotazione;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "id_utente", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
+    @JoinColumn(name = "id_evento", nullable = false)
     private Evento evento;
 
     @Column(nullable = false)
     private int postiPrenotati;
 }
-

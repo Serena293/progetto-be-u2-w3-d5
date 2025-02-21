@@ -5,14 +5,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "utenti")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long idUser;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -27,4 +28,3 @@ public class User {
     @Column(nullable = false)
     private Role role;
 }
-
