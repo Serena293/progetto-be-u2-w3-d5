@@ -4,6 +4,8 @@ import com.epicode.progetto_be_u2_w3_d5.auth.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "utenti")
 @Data
@@ -24,7 +26,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+    private Set<Role> roles;
+
+    public void setRole(Role role) {
+
+    }
 }

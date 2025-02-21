@@ -8,10 +8,14 @@ import com.epicode.progetto_be_u2_w3_d5.prenotazione.PrenotazioneRepository;
 import com.epicode.progetto_be_u2_w3_d5.user.User;
 import com.epicode.progetto_be_u2_w3_d5.user.UserRepository;
 import com.github.javafaker.Faker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,6 +28,9 @@ public class ProgettoBeU2W3D5Application {
 		SpringApplication.run(ProgettoBeU2W3D5Application.class, args);
 	}
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Bean
 	public CommandLineRunner run(UserRepository userRepository, EventoRepository eventoRepository, PrenotazioneRepository prenotazioneRepository) {
 		return args -> {
@@ -34,7 +41,7 @@ public class ProgettoBeU2W3D5Application {
 				User user = new User();
 				user.setUsername(faker.name().username());
 				user.setEmail(faker.internet().emailAddress());
-				user.setPassword(faker.internet().password());
+				user.setPassword(passwordEncoder.encode(faker.internet().password()));
 				user.setRole(i % 2 == 0 ? Role.ROLE_USER : Role.ROLE_ORGANIZZATORE);
 				users.add(user);
 			}
@@ -67,6 +74,8 @@ public class ProgettoBeU2W3D5Application {
 				}
 			}
 			prenotazioneRepository.saveAll(prenotazioni);
+
+
 		};
 	}
 }
