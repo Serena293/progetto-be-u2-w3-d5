@@ -37,9 +37,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disabilita CSRF
                 .authorizeHttpRequests(authorize -> authorize
-                        //.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() // Accesso libero a Swagger
-                        //.requestMatchers("/api/**").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/organizer/**").hasRole("ORGANIZZATORE") // Solo gli organizzatori possono accedere a questi endpoint
+                        .requestMatchers("/user/**").hasRole("USER") // Solo gli utenti normali
+                        .anyRequest().authenticated() // Tutti gli altri endpoint richiedono autenticazione
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
